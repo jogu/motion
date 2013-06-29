@@ -65,6 +65,7 @@
 #include "conf.h"
 #include "stream.h"
 #include "webhttpd.h"
+#include "videosourceplugin.h"
 
 #ifdef HAVE_SDL
 #include "sdl.h"
@@ -217,6 +218,7 @@ struct images;
 
 #include "track.h"
 #include "netcam.h"
+#include "filecam.h"
 
 #ifdef HAVE_MMAL
 #include "mmalcam.h"
@@ -244,6 +246,7 @@ struct image_data {
     time_t timestamp;           /* Timestamp when image was captured */
     struct tm timestamp_tm;
     int shot;                   /* Sub second timestamp count */
+    int total_shots;            /* Total shots taken so far */
 
     /* 
      * Movement center to img center distance 
@@ -354,9 +357,11 @@ struct context {
     unsigned int log_type;
 
     struct config conf;
+    struct video_source_plugin video_source;
     struct images imgs;
     struct trackoptions track;
     struct netcam_context *netcam;
+    struct filecam_context *filecam;
 #ifdef HAVE_MMAL
     struct mmalcam_context *mmalcam;
 #endif
@@ -395,6 +400,7 @@ struct context {
     int postcap;                             /* downcounter, frames left to to send post event */
 
     int shots;
+    int total_shots;
     unsigned int detecting_motion;
     struct tm *currenttime_tm;
     struct tm *eventtime_tm;
