@@ -7,7 +7,6 @@ aclocal.m4
 motion
 config.h
 config.status
-config.h.in
 Makefile
 configure
 motion-dist.conf
@@ -19,3 +18,6 @@ camera1-dist.conf
 camera2-dist.conf
 camera3-dist.conf
 camera4-dist.conf
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
